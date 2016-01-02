@@ -14,6 +14,7 @@ This is by no means a fully finished game, I intend to continue to add features 
 - Mouse tracking.
 - Angle of rebound varying depending on the movement of the paddle during impact.
 - Collision detection on the top surface of the paddle.
+
 But the game is fully working as it is, extra feature will be added when I have the experiance and knowledge on how to do so.
 There is currently a bug in the code causing a single block to copy the colour of the score, I have yet to locate the origin of this.
 With retro games such as these, there is only so much inovation that can go into them, at the end of the day pong is pong and tetris is tetris. 
