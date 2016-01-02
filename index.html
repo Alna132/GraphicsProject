@@ -43,10 +43,22 @@
                     ctx.closePath();
                 },// End of ball.draw()
                 move: function() {
-                    // Code for ball bouncing off the top & bottom edge.
-                    if(this.y + this.ySpeed < this.radius || this.y + this.ySpeed > canvas.height-this.radius) {
+                    // Code for ball bouncing off the top edge.
+                    if(this.y + this.ySpeed < this.radius){
                         this.ySpeed = -this.ySpeed;
                     }// End of if
+                    // Code for the ball falling of the bottom edge.
+                    else if(this.y + this.ySpeed > canvas.height-this.radius) {
+                        // Code for ball hitting the paddle.
+                        if(this.x > paddle.x && x < paddle.x + paddle.width){
+                           this.ySpeed = -this.ySpeed; 
+                        }// End of if
+                        // Code for GAME OVER.
+                        else {
+                            alert("GAME OVER");
+                            document.location.reload();
+                        }// End of else
+                    }// End of else if
                     
                     // Code for ball bouncing off the left & right edge.
                     if(this.x + this.xSpeed < this.radius || this.x + this.xSpeed > canvas.width-this.radius) {
@@ -61,7 +73,7 @@
             var paddle = {
                 height: 10,
                 width: 75,
-                x: ((canvas.width-this.width)/2),
+                x: (canvas.width-75)/2,
                 draw: function() {
                     ctx.beginPath();
                     ctx.rect(this.x, 
@@ -71,15 +83,56 @@
                     ctx.fill();
                     ctx.fillStyle = "#8A2BE2";
                     ctx.closePath();
-                }// End of paddle.draw
+                },// End of paddle.draw
+                // The ability to move the paddle left and right
+                move: function() {
+                    //This tells the paddle how far to the left it can go.
+                    if(leftPressed && this.x > 0) {
+                        this.x -= 7;
+                    }// End of if
+                    //This tells the paddle how far to the right it can go.
+                    else if(rightPressed && this.x < canvas.width-this.width) {
+                        this.x += 7;
+                    }// End of else if
+                    
+                    
+                }// End of paddle.move
             }// End of paddle
-           
+            
+            // Two variables for storing information on whether the left or right control button is pressed.
+            var leftPressed = false;
+            var rightPressed = false;
+
+            // Two event listeners for keydown and keyup events.
+            document.addEventListener("keyup", keyUpHandler, false);
+            document.addEventListener("keydown", keyDownHandler, false);
+
+            // Two functions handling the keyup and keydown events  the code that will be run when the buttons are pressed.
+            
+            function keyUpHandler(e) {
+                if(e.keyCode == 39) {
+                    rightPressed = false;
+                }// End of if
+                else if(e.keyCode == 37) {
+                    leftPressed = false;
+                }// End of else if
+            }// End of keyUpHandler(). 
+            function keyDownHandler(e) {
+                if(e.keyCode == 39) {
+                    rightPressed = true;
+                }// End of if
+                else if(e.keyCode == 37) {
+                    leftPressed = true;
+                }// End of else if
+            }// End of keyDownHandler().
+            
             
             var draw = function() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ball.draw();
-                ball.move();
                 paddle.draw();
+                ball.move();
+                paddle.move();
                 requestAnimationFrame(draw);
             }
             draw();
