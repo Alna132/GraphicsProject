@@ -132,6 +132,11 @@
                                 if(ball.x > brickDetect.x && ball.x < brickDetect.x+this.width && ball.y > brickDetect.y && ball.y < brickDetect.y+this.height) {
                                     ball.ySpeed = -ball.ySpeed;
                                     brickDetect.status = 0;
+                                    score.count++;
+                                    if(score.count == this.rowCount*this.columnCount) {
+                                        alert("YOU WIN, CONGRATULATIONS!");
+                                        document.location.reload();
+                                    }// End of if
                                 }// End of inner if
                             }// End of if
 
@@ -143,6 +148,14 @@
             // Two variables for storing information on whether the left or right control button is pressed.
             var leftPressed = false;
             var rightPressed = false;
+            var score = {
+                count: 0,
+                draw: function() {
+                    ctx.font = "16px Arial, sans-serif";
+                    ctx.fillStyle = "#FFF";
+                    ctx.fillText("Score: " + count, 8, 20);
+                }// End of score.draw()
+            };//End of score
 
             var bricks = [];
             for(columns=0; columns<brick.columnCount; columns++) {
@@ -176,11 +189,13 @@
             }// End of keyDownHandler().
             
             
+            
             var draw = function() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 brick.draw();
                 ball.draw();
                 paddle.draw();
+                score.draw();
                 ball.move();
                 paddle.move();
                 brick.collisionDetection();
