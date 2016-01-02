@@ -25,12 +25,13 @@
             var canvas = document.getElementById("gameCanvas");
             var ctx = canvas.getContext("2d");
             
+            // ball object to create and control the ball
             var ball = {
                 x: canvas.width/2,
                 y: canvas.height-30,
                 xSpeed: 2,
                 ySpeed: -2,
-                radius: 15,
+                radius: 10,
                 draw: function() {
                     ctx.beginPath();
                     ctx.arc(this.x, 
@@ -51,16 +52,34 @@
                     if(this.x + this.xSpeed < this.radius || this.x + this.xSpeed > canvas.width-this.radius) {
                         this.xSpeed = -this.xSpeed;
                     }// End of if
+                    ball.x += ball.xSpeed;
+                    ball.y += ball.ySpeed;
                 }// End of ball.move()
                 
             }// End of ball
+            
+            var paddle = {
+                height: 10,
+                width: 75,
+                x: ((canvas.width-this.width)/2),
+                draw: function() {
+                    ctx.beginPath();
+                    ctx.rect(this.x, 
+                             canvas.height-this.height, 
+                             this.width, 
+                             this.height);
+                    ctx.fill();
+                    ctx.fillStyle = "#8A2BE2";
+                    ctx.closePath();
+                }// End of paddle.draw
+            }// End of paddle
+           
             
             var draw = function() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ball.draw();
                 ball.move();
-                ball.x += ball.xSpeed;
-                ball.y += ball.ySpeed;
+                paddle.draw();
                 requestAnimationFrame(draw);
             }
             draw();
