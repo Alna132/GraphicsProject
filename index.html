@@ -19,7 +19,7 @@
     </head>
     <body>
         <!-- The HTML canvas Element can be used to draw graphics via scripting (usually JavaScript).-->
-        <canvas id="gameCanvas" width="600" height="500"></canvas>
+        <canvas id="gameCanvas" width="480" height="320"></canvas>
 
         <script>
             var canvas = document.getElementById("gameCanvas");
@@ -27,7 +27,7 @@
             
             var ball = {
                 x: canvas.width/2,
-                y: canvas.height-50,
+                y: canvas.height-30,
                 xSpeed: 2,
                 ySpeed: -2,
                 radius: 15,
@@ -40,12 +40,25 @@
                     ctx.fill();
                     ctx.fillStyle = "#8A2BE2";
                     ctx.closePath();
-                }// End of ball.draw 
+                },// End of ball.draw()
+                move: function() {
+                    // Code for ball bouncing off the top & bottom edge.
+                    if(this.y + this.ySpeed < this.radius || this.y + this.ySpeed > canvas.height-this.radius) {
+                        this.ySpeed = -this.ySpeed;
+                    }// End of if
+                    
+                    // Code for ball bouncing off the left & right edge.
+                    if(this.x + this.xSpeed < this.radius || this.x + this.xSpeed > canvas.width-this.radius) {
+                        this.xSpeed = -this.xSpeed;
+                    }// End of if
+                }// End of ball.move()
+                
             }// End of ball
             
             var draw = function() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ball.draw();
+                ball.move();
                 ball.x += ball.xSpeed;
                 ball.y += ball.ySpeed;
                 requestAnimationFrame(draw);
