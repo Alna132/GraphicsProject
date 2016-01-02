@@ -19,7 +19,7 @@
     </head>
     <body>
         <!-- The HTML canvas Element can be used to draw graphics via scripting (usually JavaScript).-->
-        <canvas id="gameCanvas" width="480" height="320"></canvas>
+        <canvas id="gameCanvas" width="900" height="700"></canvas>
 
         <script>
             var canvas = document.getElementById("gameCanvas");
@@ -27,9 +27,9 @@
             
             // paddle object to create and control the paddle from.
             var paddle = {
-                height: 10,
-                width: 75,
-                x: (canvas.width-75)/2,
+                height: 15,
+                width: 100,
+                x: (canvas.width-100)/2,
                 draw: function() {
                     ctx.beginPath();
                     ctx.rect(this.x, 
@@ -98,13 +98,13 @@
             
             // brick object to creat and control the bricks from.
             var brick = {
-                rowCount: 3,
-                columnCount: 5,
-                width: 75,
+                rowCount: 6,
+                columnCount: 9,
+                width: 85,
                 height: 20,
                 padding: 10,
-                topOffset: 30,
-                leftOffset: 30,
+                topOffset: 35,
+                leftOffset: 35,
                 draw: function() {
                     for(columns=0; columns<this.columnCount; columns++){
                         for(rows=0; rows<this.rowCount; rows++) {
