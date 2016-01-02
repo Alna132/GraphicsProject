@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        // To display an HTML page correctly, a web browser must know the character set to use.
-        // I am using UTF-8 (Unicode) as it covers almost all of the characters and symbols in the world.
+        <!-- To display an HTML page correctly, a web browser must know the character set to use.
+        I am using UTF-8 (Unicode) as it covers almost all of the characters and symbols in the world.-->
         <meta charset="utf-8" />
-        // The HTML title element defines the title of the document, shown in a browser's title bar or on the page's tab.
+        <!-- The HTML title element defines the title of the document, shown in a browser's title bar or on the page's tab.-->
         <title>Brick Breaker Game</title>
-        // The HTML style element contains style information for a document, or part of a document.
+        <!-- The HTML style element contains style information for a document, or part of a document.-->
         <style>
             * { 
                 padding: 0; 
@@ -18,12 +18,22 @@
         </style>
     </head>
     <body>
-        // The HTML canvas Element can be used to draw graphics via scripting (usually JavaScript).
+        <!-- The HTML canvas Element can be used to draw graphics via scripting (usually JavaScript).-->
         <canvas id="gameCanvas" width="600" height="500"></canvas>
 
         <script>
-            var canvas = document.getElementById("gamecanvas");
+            var canvas = document.getElementById("gameCanvas");
             var ctx = canvas.getContext("2d");
+            
+            var draw = function() {
+                ctx.beginPath();
+                ctx.arc(50, 50, 10, 0, Math.PI*2);
+                ctx.fillStyle = "#8A2BE2";
+                ctx.fill();
+                ctx.closePath();
+            }
+            requestAnimationFrame(draw);
+            
         </script>
 
     </body>
