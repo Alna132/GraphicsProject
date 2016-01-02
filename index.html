@@ -25,7 +25,7 @@
             var canvas = document.getElementById("gameCanvas");
             var ctx = canvas.getContext("2d");
             
-            // paddle object to create and control the paddle
+            // paddle object to create and control the paddle from.
             var paddle = {
                 height: 10,
                 width: 75,
@@ -53,8 +53,8 @@
                     
                     
                 }// End of paddle.move
-            }// End of paddle            
-            // ball object to create and control the ball
+            };// End of paddle            
+            // ball object to create and control the ball from.
             var ball = {
                 x: canvas.width/2,
                 y: canvas.height-30,
@@ -97,8 +97,8 @@
                     ball.y += ball.ySpeed;
                 }// End of ball.move()
                 
-            }// End of ball
-            
+            };// End of ball
+            // brick object to creat and control the bricks from.
             var brick = {
                 rowCount: 3,
                 columnCount: 5,
@@ -106,13 +106,36 @@
                 height: 20,
                 padding: 10,
                 topOffset: 30,
-                leftOffset: 30
-            }// End of brick
+                leftOffset: 30,
+                draw: function() {
+                    for(columns=0; columns<this.columnCount; columns++){
+                        for(rows=0; rows<this.rowCount; rows++) {
+                            var brickY = (rows*(this.height+this.padding))+this.topOffset;
+                            var brickX = (columns*(this.width+this.padding))+this.leftOffset;
+                            bricks[columns][rows].x = brickX;
+                            bricks[columns][rows].y = brickY;
+                            ctx.beginPath();
+                            ctx.rect(brickX, brickY, this.width, this.height);
+                            ctx.fill();
+                            ctx.fillStyle = "#8A2BE2";
+                            ctx.closePath();
+                        }// End of inner for
+                    }// End of for
+                }// End of brick.draw()
+            };// End of brick
             
             // Two variables for storing information on whether the left or right control button is pressed.
             var leftPressed = false;
             var rightPressed = false;
 
+            var bricks = [];
+            for(columns=0; columns<brick.columnCount; columns++) {
+                bricks[columns] = [];
+                for(rows=0; rows<brick.rowCount; rows++) {
+                    bricks[columns][rows] = { x: 0, y: 0};
+                }// End of inner for.
+            }// End of for.
+            
             // Two event listeners for keydown and keyup events.
             document.addEventListener("keyup", keyUpHandler, false);
             document.addEventListener("keydown", keyDownHandler, false);
@@ -139,12 +162,13 @@
             
             var draw = function() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
+                brick.draw();
                 ball.draw();
                 paddle.draw();
                 ball.move();
                 paddle.move();
                 requestAnimationFrame(draw);
-            }
+            };
             draw();
             
         </script>
