@@ -121,7 +121,17 @@
                             ctx.closePath();
                         }// End of inner for
                     }// End of for
-                }// End of brick.draw()
+                },// End of brick.draw()
+                collisionDetection: function() {
+                    for(columns=0; columns<this.columnCount; columns++) {
+                        for(rows=0; rows<this.rowCount; rows++) {
+                            var brickDetect = bricks[columns][rows];
+                            if(ball.x > brickDetect.x && ball.x < brickDetect.x+this.width && ball.y > brickDetect.y && ball.y < brickDetect.y+this.height) {
+                                ball.ySpeed = -ball.ySpeed;
+                            }// End of if
+                        }// End of inner for
+                    }// End of for
+                }// End of brick.collisionDetection()
             };// End of brick
             
             // Two variables for storing information on whether the left or right control button is pressed.
@@ -167,6 +177,7 @@
                 paddle.draw();
                 ball.move();
                 paddle.move();
+                brick.collisionDetection();
                 requestAnimationFrame(draw);
             };
             draw();
