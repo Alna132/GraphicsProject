@@ -83,7 +83,7 @@
                         }// End of if
                         // Code for GAME OVER.
                         else {
-                            alert("GAME OVER");
+                            alert("              GAME OVER. \n Too bad, you lost, better luck next time. \n       Would you like to try again?");
                             document.location.reload();
                         }// End of else
                     }// End of else if
@@ -132,7 +132,7 @@
                                     brickDetect.status = 0;
                                     score.count++;
                                     if(score.count == this.rowCount*this.columnCount) {
-                                        alert("YOU WIN, CONGRATULATIONS!");
+                                        alert("                 CONGRATULATIONS! \n         YOU'VE WON! \n      Would you like to play again?");
                                         document.location.reload();
                                     }// End of if
                                 }// End of inner if
