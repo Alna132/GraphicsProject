@@ -14,7 +14,7 @@ This is by no means a fully finished game, I intend to continue to add features 
 - Mouse tracking.
 - Angle of rebound varying depending on the movement of the paddle during impact.
 - Collision detection on the top surface of the paddle.
-But the game is fully working as it is.
+But the game is fully working as it is, extra feature will be added when I have the experiance and knowledge on how to do so.
 With retro games such as these, there is only so much inovation that can go into them, at the end of the day pong is pong and tetris is tetris. 
 Any code that may seem similar to any other code is not intended, as all the code was typed out and not copied. 
 
