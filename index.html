@@ -30,16 +30,22 @@
                 y: canvas.height-50,
                 xSpeed: 2,
                 ySpeed: -2,
-                radius: 15
-            }
+                radius: 15,
+                draw: function() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, 
+                            this.y, 
+                            this.radius, 
+                            0, 2 * Math.PI);
+                    ctx.fill();
+                    ctx.fillStyle = "#8A2BE2";
+                    ctx.closePath();
+                }// End of ball.draw 
+            }// End of ball
             
             var draw = function() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.beginPath();
-                ctx.arc(ball.x, ball.y, ball.radius, 0, 2 * Math.PI);
-                ctx.fillStyle = "#8A2BE2";
-                ctx.fill();
-                ctx.closePath();
+                ball.draw();
                 ball.x += ball.xSpeed;
                 ball.y += ball.ySpeed;
                 requestAnimationFrame(draw);
