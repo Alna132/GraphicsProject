@@ -50,10 +50,9 @@
                     else if(rightPressed && this.x < canvas.width-this.width) {
                         this.x += 7;
                     }// End of else if
-                    
-                    
                 }// End of paddle.move
-            };// End of paddle            
+            };// End of paddle 
+            
             // ball object to create and control the ball from.
             var ball = {
                 x: canvas.width/2,
@@ -88,7 +87,6 @@
                             document.location.reload();
                         }// End of else
                     }// End of else if
-                    
                     // Code for ball bouncing off the left & right edge.
                     if(this.x + this.xSpeed < this.radius || this.x + this.xSpeed > canvas.width-this.radius) {
                         this.xSpeed = -this.xSpeed;
@@ -96,8 +94,8 @@
                     ball.x += ball.xSpeed;
                     ball.y += ball.ySpeed;
                 }// End of ball.move()
-                
             };// End of ball
+            
             // brick object to creat and control the bricks from.
             var brick = {
                 rowCount: 3,
@@ -153,7 +151,7 @@
                 draw: function() {
                     ctx.font = "16px Arial, sans-serif";
                     ctx.fillStyle = "#FFF";
-                    ctx.fillText("Score: " + count, 8, 20);
+                    ctx.fillText("Score: " + score.count, 8, 20);
                 }// End of score.draw()
             };//End of score
 
@@ -170,7 +168,6 @@
             document.addEventListener("keydown", keyDownHandler, false);
 
             // Two functions handling the keyup and keydown events  the code that will be run when the buttons are pressed.
-            
             function keyUpHandler(e) {
                 if(e.keyCode == 39) {
                     rightPressed = false;
@@ -188,9 +185,7 @@
                 }// End of else if
             }// End of keyDownHandler().
             
-            
-            
-            var draw = function() {
+            var step = function() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 brick.draw();
                 ball.draw();
@@ -199,11 +194,10 @@
                 ball.move();
                 paddle.move();
                 brick.collisionDetection();
-                requestAnimationFrame(draw);
+                requestAnimationFrame(step);
             };
-            draw();
+            step();
             
         </script>
-
     </body>
 </html>
