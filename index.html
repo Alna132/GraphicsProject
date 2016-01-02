@@ -110,15 +110,17 @@
                 draw: function() {
                     for(columns=0; columns<this.columnCount; columns++){
                         for(rows=0; rows<this.rowCount; rows++) {
-                            var brickY = (rows*(this.height+this.padding))+this.topOffset;
-                            var brickX = (columns*(this.width+this.padding))+this.leftOffset;
-                            bricks[columns][rows].x = brickX;
-                            bricks[columns][rows].y = brickY;
-                            ctx.beginPath();
-                            ctx.rect(brickX, brickY, this.width, this.height);
-                            ctx.fill();
-                            ctx.fillStyle = "#8A2BE2";
-                            ctx.closePath();
+                            if(bricks[columns][rows].status == 1){
+                                var brickY = (rows*(this.height+this.padding))+this.topOffset;
+                                var brickX = (columns*(this.width+this.padding))+this.leftOffset;
+                                bricks[columns][rows].x = brickX;
+                                bricks[columns][rows].y = brickY;
+                                ctx.beginPath();
+                                ctx.rect(brickX, brickY, this.width, this.height);
+                                ctx.fill();
+                                ctx.fillStyle = "#8A2BE2";
+                                ctx.closePath();
+                            }// End of if
                         }// End of inner for
                     }// End of for
                 },// End of brick.draw()
@@ -126,9 +128,13 @@
                     for(columns=0; columns<this.columnCount; columns++) {
                         for(rows=0; rows<this.rowCount; rows++) {
                             var brickDetect = bricks[columns][rows];
-                            if(ball.x > brickDetect.x && ball.x < brickDetect.x+this.width && ball.y > brickDetect.y && ball.y < brickDetect.y+this.height) {
-                                ball.ySpeed = -ball.ySpeed;
+                            if(brickDetect.status == 1) {
+                                if(ball.x > brickDetect.x && ball.x < brickDetect.x+this.width && ball.y > brickDetect.y && ball.y < brickDetect.y+this.height) {
+                                    ball.ySpeed = -ball.ySpeed;
+                                    brickDetect.status = 0;
+                                }// End of inner if
                             }// End of if
+
                         }// End of inner for
                     }// End of for
                 }// End of brick.collisionDetection()
@@ -142,7 +148,7 @@
             for(columns=0; columns<brick.columnCount; columns++) {
                 bricks[columns] = [];
                 for(rows=0; rows<brick.rowCount; rows++) {
-                    bricks[columns][rows] = { x: 0, y: 0};
+                    bricks[columns][rows] = { x: 0, y: 0, status: 1 };
                 }// End of inner for.
             }// End of for.
             
