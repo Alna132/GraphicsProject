@@ -25,14 +25,25 @@
             var canvas = document.getElementById("gameCanvas");
             var ctx = canvas.getContext("2d");
             
+            var ball = {
+                x: canvas.width/2,
+                y: canvas.height-50,
+                xSpeed: 2,
+                ySpeed: -2,
+                radius: 15
+            }
+            
             var draw = function() {
                 ctx.beginPath();
-                ctx.arc(50, 50, 10, 0, Math.PI*2);
+                ctx.arc(ball.x, ball.y, ball.radius, 0, 2 * Math.PI);
                 ctx.fillStyle = "#8A2BE2";
                 ctx.fill();
                 ctx.closePath();
+                ball.x += ball.xSpeed;
+                ball.y += ball.ySpeed;
+                requestAnimationFrame(draw);
             }
-            requestAnimationFrame(draw);
+            draw();
             
         </script>
 
