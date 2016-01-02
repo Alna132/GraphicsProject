@@ -25,51 +25,7 @@
             var canvas = document.getElementById("gameCanvas");
             var ctx = canvas.getContext("2d");
             
-            // ball object to create and control the ball
-            var ball = {
-                x: canvas.width/2,
-                y: canvas.height-30,
-                xSpeed: 2,
-                ySpeed: -2,
-                radius: 10,
-                draw: function() {
-                    ctx.beginPath();
-                    ctx.arc(this.x, 
-                            this.y, 
-                            this.radius, 
-                            0, 2 * Math.PI);
-                    ctx.fill();
-                    ctx.fillStyle = "#8A2BE2";
-                    ctx.closePath();
-                },// End of ball.draw()
-                move: function() {
-                    // Code for ball bouncing off the top edge.
-                    if(this.y + this.ySpeed < this.radius){
-                        this.ySpeed = -this.ySpeed;
-                    }// End of if
-                    // Code for the ball falling of the bottom edge.
-                    else if(this.y + this.ySpeed > canvas.height-this.radius) {
-                        // Code for ball hitting the paddle.
-                        if(this.x > paddle.x && x < paddle.x + paddle.width){
-                           this.ySpeed = -this.ySpeed; 
-                        }// End of if
-                        // Code for GAME OVER.
-                        else {
-                            alert("GAME OVER");
-                            document.location.reload();
-                        }// End of else
-                    }// End of else if
-                    
-                    // Code for ball bouncing off the left & right edge.
-                    if(this.x + this.xSpeed < this.radius || this.x + this.xSpeed > canvas.width-this.radius) {
-                        this.xSpeed = -this.xSpeed;
-                    }// End of if
-                    ball.x += ball.xSpeed;
-                    ball.y += ball.ySpeed;
-                }// End of ball.move()
-                
-            }// End of ball
-            
+            // paddle object to create and control the paddle
             var paddle = {
                 height: 10,
                 width: 75,
@@ -97,7 +53,51 @@
                     
                     
                 }// End of paddle.move
-            }// End of paddle
+            }// End of paddle            
+            // ball object to create and control the ball
+            var ball = {
+                x: canvas.width/2,
+                y: canvas.height-30,
+                xSpeed: 2,
+                ySpeed: -2,
+                radius: 10,
+                draw: function() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, 
+                            this.y, 
+                            this.radius, 
+                            0, 2 * Math.PI);
+                    ctx.fill();
+                    ctx.fillStyle = "#8A2BE2";
+                    ctx.closePath();
+                },// End of ball.draw()
+                move: function() {
+                    // Code for ball bouncing off the top edge.
+                    if(this.y + this.ySpeed < this.radius){
+                        this.ySpeed = -this.ySpeed;
+                    }// End of if
+                    // Code for the ball falling of the bottom edge.
+                    else if(this.y + this.ySpeed > canvas.height-this.radius) {
+                        // Code for ball hitting the paddle.
+                        if(this.x > paddle.x && this.x < paddle.x + paddle.width){
+                           this.ySpeed = -this.ySpeed; 
+                        }// End of if
+                        // Code for GAME OVER.
+                        else {
+                            alert("GAME OVER");
+                            document.location.reload();
+                        }// End of else
+                    }// End of else if
+                    
+                    // Code for ball bouncing off the left & right edge.
+                    if(this.x + this.xSpeed < this.radius || this.x + this.xSpeed > canvas.width-this.radius) {
+                        this.xSpeed = -this.xSpeed;
+                    }// End of if
+                    ball.x += ball.xSpeed;
+                    ball.y += ball.ySpeed;
+                }// End of ball.move()
+                
+            }// End of ball
             
             // Two variables for storing information on whether the left or right control button is pressed.
             var leftPressed = false;
