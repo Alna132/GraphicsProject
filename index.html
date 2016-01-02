@@ -1,19 +1,29 @@
 <!DOCTYPE html>
 <html>
     <head>
+        // To display an HTML page correctly, a web browser must know the character set to use.
+        // I am using UTF-8 (Unicode) as it covers almost all of the characters and symbols in the world.
         <meta charset="utf-8" />
+        // The HTML title element defines the title of the document, shown in a browser's title bar or on the page's tab.
         <title>Brick Breaker Game</title>
+        // The HTML style element contains style information for a document, or part of a document.
         <style>
-            * { padding: 0; margin: 0; }
-            canvas { background: #000; display: block; margin: 0 auto; }
+            * { 
+                padding: 0; 
+                margin: 0; }
+            canvas { 
+                background: #000; 
+                display: block; 
+                margin: 0 auto; }
         </style>
     </head>
     <body>
-
+        // The HTML canvas Element can be used to draw graphics via scripting (usually JavaScript).
         <canvas id="gameCanvas" width="600" height="500"></canvas>
 
         <script>
-            // JavaScript code goes here
+            var canvas = document.getElementById("gamecanvas");
+            var ctx = canvas.getContext("2d");
         </script>
 
     </body>
